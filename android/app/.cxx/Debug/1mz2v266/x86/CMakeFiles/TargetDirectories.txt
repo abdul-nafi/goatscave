@@ -1,0 +1,2 @@
+/Users/abdulnafih/Documents/new app/goatscave/android/app/.cxx/Debug/1mz2v266/x86/CMakeFiles/edit_cache.dir
+/Users/abdulnafih/Documents/new app/goatscave/android/app/.cxx/Debug/1mz2v266/x86/CMakeFiles/rebuild_cache.dir
