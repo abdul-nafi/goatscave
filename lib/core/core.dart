@@ -7,3 +7,6 @@ export 'widgets/horizontal_item_scroller.dart';
 export 'widgets/animated_action_button.dart';
 export 'widgets/category_chip_button.dart';
 export 'widgets/horizontal_image_card.dart';
+export 'widgets/category_icon_button.dart';
+export 'widgets/product_card.dart';
+export 'widgets/shop_card.dart';
