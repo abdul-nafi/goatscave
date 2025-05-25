@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/auth.dart';
+import '../../features/grocery/grocery.dart';
 import '../../features/services/services.dart';
 import '../../features/user/user.dart';
 
@@ -19,7 +20,12 @@ class AppRouter {
       builder: (context, state) => const UserHomePage(),
     ),
     GoRoute(
-        path: '/services',
-        builder: (context, state) => const AllServicesPage()),
+      path: '/services',
+      builder: (context, state) => const AllServicesPage(),
+    ),
+    GoRoute(
+      path: "/grocery",
+      builder: (context, state) => const GroceryHomePage(),
+    )
   ]);
 }

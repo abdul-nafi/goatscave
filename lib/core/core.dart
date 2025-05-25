@@ -5,3 +5,5 @@ export 'theme/colors.dart';
 export 'widgets/promo_carousal_card.dart';
 export 'widgets/horizontal_item_scroller.dart';
 export 'widgets/animated_action_button.dart';
+export 'widgets/category_chip_button.dart';
+export 'widgets/horizontal_image_card.dart';

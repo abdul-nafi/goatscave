@@ -21,7 +21,7 @@ class AllServicesPage extends StatelessWidget {
       body: GridView.count(
         crossAxisCount: 3,
         padding: EdgeInsets.all(16.w),
-        children: animatedActionButtons,
+        children: animatedActionButtons(context),
       ),
     );
   }

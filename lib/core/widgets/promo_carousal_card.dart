@@ -23,9 +23,12 @@ class _PromoCarouselBannerState extends State<PromoCarouselBanner> {
             controller: _controller,
             itemCount: widget.imagePaths.length,
             onPageChanged: (index) => setState(() => _currentPage = index),
-            itemBuilder: (_, index) => ClipRRect(
-              borderRadius: BorderRadius.circular(16.r),
-              child: Image.asset(widget.imagePaths[index], fit: BoxFit.cover),
+            itemBuilder: (_, index) => Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.r),
+                child: Image.asset(widget.imagePaths[index], fit: BoxFit.cover),
+              ),
             ),
           ),
         ),
