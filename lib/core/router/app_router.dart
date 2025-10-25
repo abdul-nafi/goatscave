@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goatscave/features/home/home.dart';
 import '../../features/auth/auth.dart';
 import '../../features/grocery/grocery.dart';
-import '../../features/services/services.dart';
+
+import 'package:goatscave/core/core.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -19,7 +21,7 @@ class AppRouter {
       GoRoute(
         path: "/home",
         builder: (context, state) =>
-            const HomeScreen(), // Updated to new HomeScreen
+            const HomeScreen(), // Updated to use GroceryHomePage as HomeScreen
       ),
       GoRoute(
         path: '/services',
@@ -75,8 +77,8 @@ class PlaceholderScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.construction, size: 64, color: AppColors.primary),
-            SizedBox(height: 16),
+            const Icon(Icons.construction, size: 64, color: AppColors.primary),
+            const SizedBox(height: 16),
             Text(
               '$title\nComing Soon!',
               style: Theme.of(context).textTheme.titleLarge,
