@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goatscave/features/food/food.dart';
+
 import 'package:goatscave/features/home/home.dart';
 import '../../features/auth/auth.dart';
 import '../../features/grocery/grocery.dart';
@@ -40,12 +42,20 @@ class AppRouter {
             const PlaceholderScreen(title: 'Bus Tracking'),
       ),
       GoRoute(
-        path: "/food",
+        path: "/parcels",
         builder: (context, state) => const Placeholder(),
       ),
       GoRoute(
-        path: "/parcels",
-        builder: (context, state) => const Placeholder(),
+        path: "/food",
+        builder: (context, state) => const RestaurantListScreen(),
+      ),
+      GoRoute(
+        path: '/food/restaurants/:id',
+        builder: (context, state) {
+          final restaurantId = state.pathParameters['id']!;
+          return PlaceholderScreen(
+              title: 'Restaurant Details for ID: $restaurantId');
+        },
       ),
       GoRoute(
         path: "/wallet",
