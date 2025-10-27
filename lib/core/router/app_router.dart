@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:goatscave/features/food/food.dart';
 
 import 'package:goatscave/features/home/home.dart';
-import '../../features/auth/auth.dart';
-import '../../features/grocery/grocery.dart';
+
 import 'package:goatscave/features/taxi/taxi.dart';
 
 import 'package:goatscave/core/core.dart';
@@ -15,11 +14,11 @@ class AppRouter {
     routes: [
       GoRoute(
         path: "/login",
-        builder: (context, state) => LoginPage(),
+        builder: (context, state) => Placeholder(),
       ),
       GoRoute(
         path: "/signup",
-        builder: (context, state) => SignUpPage(),
+        builder: (context, state) => Placeholder(),
       ),
       GoRoute(
         path: "/home",
@@ -32,7 +31,7 @@ class AppRouter {
       ),
       GoRoute(
         path: "/grocery",
-        builder: (context, state) => const GroceryHomePage(),
+        builder: (context, state) => const Placeholder(),
       ),
       // 🆕 NEW ROUTES FOR SUPER APP
 

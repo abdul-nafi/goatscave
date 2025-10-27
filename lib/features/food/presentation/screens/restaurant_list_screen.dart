@@ -160,7 +160,12 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                 image: DecorationImage(
                   image: NetworkImage(restaurant.imageUrl),
                   fit: BoxFit.cover,
+                  onError: (exception, stackTrace) {
+                    debugPrint('Error loading image: $exception');
+                  },
                 ),
+
+                color: AppColors.background,
               ),
               child: Stack(
                 children: [
@@ -173,8 +178,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                           EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                       decoration: BoxDecoration(
                         color: restaurant.isOpen
-                            ? AppColors.success.withOpacity(0.9)
-                            : AppColors.error.withOpacity(0.9),
+                            ? AppColors.success.withAlpha(230)
+                            : AppColors.error.withAlpha(230),
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Text(

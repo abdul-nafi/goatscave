@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:goatscave/core/core.dart';
 
 class TaxiBookingScreen extends StatefulWidget {
@@ -63,44 +64,33 @@ class _TaxiBookingScreenState extends State<TaxiBookingScreen> {
           // Map Placeholder
           Expanded(
             flex: 2,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                border: Border.all(color: AppColors.border),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.map_outlined,
-                    size: 64.sp,
-                    color: AppColors.textTertiary,
+            child: Stack(
+              children: [
+                OpenStreetMapWidget(
+                  initialCenter:
+                      const LatLng(9.9312, 76.2673), // Kochi coordinates
+                  initialZoom: 13.0,
+                  onTap: (latLng) {
+                    // Handle map taps for location selection
+                    print('Map tapped at: $latLng');
+                    _showLocationSelectedDialog(latLng);
+                  },
+                ),
+
+                // Current Location Button
+                Positioned(
+                  top: 16.h,
+                  right: 16.w,
+                  child: FloatingActionButton.small(
+                    onPressed: _getCurrentLocation,
+                    backgroundColor: AppColors.surface,
+                    child: Icon(Icons.my_location,
+                        color: AppColors.primary, size: 18.sp),
                   ),
-                  SizedBox(height: 16.h),
-                  Text(
-                    'Live Map Coming Soon',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
-                  ),
-                  SizedBox(height: 8.h),
-                  ElevatedButton(
-                    onPressed: () {
-                      // TODO: Implement map integration
-                      _showComingSoonDialog(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.taxiColor,
-                      foregroundColor: AppColors.textInverse,
-                    ),
-                    child: Text('Enable Location'),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-
           // Booking Form
           Expanded(
             flex: 3,
@@ -238,6 +228,54 @@ class _TaxiBookingScreenState extends State<TaxiBookingScreen> {
     );
   }
 
+  void _getCurrentLocation() async {
+    // TODO: Implement actual location service
+    _showComingSoonDialog(context);
+
+    // Demo: Set a temporary location after 1 second
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        pickupLocation = 'Current Location (Demo)';
+        _calculateFare();
+      });
+    });
+  }
+
+  void _showLocationSelectedDialog(LatLng latLng) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Location Selected'),
+        content: Text(
+            'Lat: ${latLng.latitude.toStringAsFixed(4)}\nLng: ${latLng.longitude.toStringAsFixed(4)}'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                pickupLocation =
+                    '${latLng.latitude.toStringAsFixed(4)}, ${latLng.longitude.toStringAsFixed(4)}';
+                _calculateFare();
+              });
+            },
+            child: Text('Set as Pickup'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                dropoffLocation =
+                    '${latLng.latitude.toStringAsFixed(4)}, ${latLng.longitude.toStringAsFixed(4)}';
+                _calculateFare();
+              });
+            },
+            child: Text('Set as Dropoff'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildVehicleSelection() {
     return SizedBox(
       height: 80.h,
@@ -272,6 +310,7 @@ class _TaxiBookingScreenState extends State<TaxiBookingScreen> {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     vehicle['icon'] as IconData,
@@ -280,17 +319,20 @@ class _TaxiBookingScreenState extends State<TaxiBookingScreen> {
                         : vehicle['color'] as Color,
                     size: 24.sp,
                   ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    vehicle['name'] as String,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: isSelected
-                              ? AppColors.textInverse
-                              : AppColors.textPrimary,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
+                  SizedBox(height: 4.h),
+                  Flexible(
+                    child: Text(
+                      vehicle['name'] as String,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: isSelected
+                                ? AppColors.textInverse
+                                : AppColors.textPrimary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),

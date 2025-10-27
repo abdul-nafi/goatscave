@@ -1,12 +1,3 @@
-export 'widgets/app_text_field.dart';
-export 'widgets/primary_button.dart';
-
-export 'widgets/promo_carousal_card.dart';
-export 'widgets/horizontal_item_scroller.dart';
-export 'widgets/animated_action_button.dart';
-export 'widgets/category_chip_button.dart';
-export 'widgets/horizontal_image_card.dart';
-export 'widgets/category_icon_button.dart';
-export 'widgets/product_card.dart';
-export 'widgets/shop_card.dart';
 export 'theme/theme.dart';
+export 'widgets/widgets.dart';
+export 'router/app_router.dart';
