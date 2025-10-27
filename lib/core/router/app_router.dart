@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:goatscave/features/home/home.dart';
 import '../../features/auth/auth.dart';
 import '../../features/grocery/grocery.dart';
+import 'package:goatscave/features/taxi/taxi.dart';
 
 import 'package:goatscave/core/core.dart';
 
@@ -32,10 +33,7 @@ class AppRouter {
         builder: (context, state) => const GroceryHomePage(),
       ),
       // 🆕 NEW ROUTES FOR SUPER APP
-      GoRoute(
-        path: "/taxi",
-        builder: (context, state) => const Placeholder(),
-      ),
+
       GoRoute(
         path: "/bus",
         builder: (context, state) =>
@@ -60,6 +58,10 @@ class AppRouter {
       ),
       GoRoute(
           path: "/profile", builder: (context, state) => const Placeholder()),
+      GoRoute(
+        path: "/taxi",
+        builder: (context, state) => const TaxiBookingScreen(),
+      )
     ],
   );
 }
