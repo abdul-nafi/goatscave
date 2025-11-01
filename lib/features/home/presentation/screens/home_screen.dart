@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 color: AppColors.primary,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withAlpha(77),
                     blurRadius: 8.r,
                     offset: Offset(0, 2.h),
                   ),
@@ -233,7 +233,7 @@ class HomeScreen extends StatelessWidget {
                 width: 36.w, // Smaller container
                 height: 36.h,
                 decoration: BoxDecoration(
-                  color: AppColors.busColor.withOpacity(0.1),
+                  color: AppColors.busColor.withAlpha(26),
                   borderRadius: BorderRadius.circular(10.r), // Smaller radius
                 ),
                 child: Icon(
