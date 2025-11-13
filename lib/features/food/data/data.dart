@@ -1,1 +1,1 @@
-export 'models/models.dart';
+export 'search_service.dart';

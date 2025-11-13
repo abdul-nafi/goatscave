@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goatscave/features/food/food.dart';
+import 'package:goatscave/features/food/presentation/screens/food_home_screen.dart';
 
 import 'package:goatscave/features/home/home.dart';
 
 import 'package:goatscave/features/taxi/taxi.dart';
-
+import 'package:goatscave/features/cart/cart.dart';
 import 'package:goatscave/core/core.dart';
 
 class AppRouter {
@@ -46,14 +47,16 @@ class AppRouter {
       ),
       GoRoute(
         path: "/food",
-        builder: (context, state) => const RestaurantListScreen(),
+        builder: (context, state) {
+          return const FoodHomeScreen();
+        },
       ),
       GoRoute(
-        path: '/food/restaurants/:id',
+        path: '/restaurant/:id',
+        name: 'restaurant',
         builder: (context, state) {
           final restaurantId = state.pathParameters['id']!;
-          return PlaceholderScreen(
-              title: 'Restaurant Details for ID: $restaurantId');
+          return RestaurantDetailScreen(restaurantId: restaurantId);
         },
       ),
       GoRoute(
@@ -70,7 +73,11 @@ class AppRouter {
       GoRoute(
         path: "/taxi",
         builder: (context, state) => const TaxiBookingScreen(),
-      )
+      ),
+      GoRoute(
+        path: "/cart",
+        builder: (context, state) => const CartScreen(),
+      ),
     ],
   );
 }

@@ -5,6 +5,8 @@ import 'package:goatscave/core/core.dart';
 
 import 'package:goatscave/features/food/food.dart';
 
+import 'features/cart/cart.dart';
+
 void main() {
   runApp(const GoatsCaveApp());
 }
@@ -21,9 +23,9 @@ class GoatsCaveApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            // BlocProvider<CartBloc>(
-            //     create: (context) => CartBloc(),
-            //  ),
+            BlocProvider<CartBloc>(
+              create: (context) => CartBloc(),
+            ),
             BlocProvider<FoodBloc>(
               create: (context) => FoodBloc(),
             ),

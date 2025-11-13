@@ -177,6 +177,7 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   width: 40.w, // Smaller container
@@ -192,14 +193,17 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 6.h), // Reduced spacing
-                Text(
-                  action['label'] as String,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                        fontSize: 10.sp, // Smaller font
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
+                Flexible(
+                  child: Text(
+                    action['label'] as String,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 10.sp, // Smaller font
+                        ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
@@ -265,6 +269,7 @@ class HomeScreen extends StatelessWidget {
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.map_outlined,
@@ -272,12 +277,17 @@ class HomeScreen extends StatelessWidget {
                     color: AppColors.textTertiary,
                   ),
                   SizedBox(height: 6.h), // Reduced spacing
-                  Text(
-                    'Track buses in real-time',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                          fontSize: 12.sp, // Smaller font
-                        ),
+                  Flexible(
+                    child: Text(
+                      'Track buses in real-time',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.textSecondary,
+                            fontSize: 12.sp, // Smaller font
+                          ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   SizedBox(height: 8.h), // Reduced spacing
                   ElevatedButton(
@@ -347,6 +357,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.restaurant,
@@ -354,22 +365,30 @@ class HomeScreen extends StatelessWidget {
                         size: 16.sp, // Smallest icon
                       ),
                       SizedBox(height: 4.h), // Minimal spacing
-                      Text(
-                        'Food',
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: AppColors.textInverse,
-                              fontSize: 11.sp, // Smaller font
-                              fontWeight: FontWeight.w600,
-                            ),
-                        maxLines: 1,
+                      Flexible(
+                        child: Text(
+                          'Food',
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: AppColors.textInverse,
+                                    fontSize: 11.sp, // Smaller font
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      Text(
-                        'Delivery',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.textInverse.withOpacity(0.8),
-                              fontSize: 8.sp, // Smallest font
-                            ),
-                        maxLines: 1,
+                      Flexible(
+                        child: Text(
+                          'Delivery',
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.textInverse.withAlpha(204),
+                                    fontSize: 8.sp, // Smallest font
+                                  ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),

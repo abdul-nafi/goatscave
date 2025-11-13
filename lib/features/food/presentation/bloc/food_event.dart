@@ -8,13 +8,9 @@ abstract class FoodEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadRestaurants extends FoodEvent {
-  final String? category;
-
-  const LoadRestaurants({this.category});
-
-  @override
-  List<Object> get props => [category ?? ''];
+// Restaurant Events
+class LoadAllRestaurants extends FoodEvent {
+  const LoadAllRestaurants();
 }
 
 class LoadRestaurantDetail extends FoodEvent {
@@ -26,10 +22,10 @@ class LoadRestaurantDetail extends FoodEvent {
   List<Object> get props => [restaurantId];
 }
 
-class SearchRestaurants extends FoodEvent {
+class SearchFoodAndRestaurants extends FoodEvent {
   final String query;
 
-  const SearchRestaurants(this.query);
+  const SearchFoodAndRestaurants(this.query);
 
   @override
   List<Object> get props => [query];
@@ -44,15 +40,73 @@ class FilterByCategory extends FoodEvent {
   List<Object> get props => [category];
 }
 
-class ToggleRestaurantFavorite extends FoodEvent {
+class LoadFoodCategories extends FoodEvent {
+  const LoadFoodCategories();
+}
+
+class ClearFoodFilters extends FoodEvent {
+  const ClearFoodFilters();
+}
+
+// Menu Events
+class LoadRestaurantMenu extends FoodEvent {
   final String restaurantId;
 
-  const ToggleRestaurantFavorite(this.restaurantId);
+  const LoadRestaurantMenu(this.restaurantId);
 
   @override
   List<Object> get props => [restaurantId];
 }
 
-class LoadFoodCategories extends FoodEvent {}
+class FilterMenuByCategory extends FoodEvent {
+  final String category;
 
-class ClearFoodFilters extends FoodEvent {}
+  const FilterMenuByCategory(this.category);
+
+  @override
+  List<Object> get props => [category];
+}
+
+class ClearMenuFilter extends FoodEvent {
+  const ClearMenuFilter();
+}
+
+class SearchMenuItems extends FoodEvent {
+  final String query;
+
+  const SearchMenuItems(this.query);
+
+  @override
+  List<Object> get props => [query];
+}
+
+// Cart Events
+class AddToCart extends FoodEvent {
+  final String itemId;
+  final int quantity;
+
+  const AddToCart(this.itemId, this.quantity);
+
+  @override
+  List<Object> get props => [itemId, quantity];
+}
+
+class UpdateCartQuantity extends FoodEvent {
+  final String itemId;
+  final int quantity;
+
+  const UpdateCartQuantity(this.itemId, this.quantity);
+
+  @override
+  List<Object> get props => [itemId, quantity];
+}
+
+class ClearCart extends FoodEvent {
+  const ClearCart();
+}
+
+// REMOVED EVENTS (no longer needed):
+// - LoadRestaurants (use LoadAllRestaurants instead)
+// - SearchRestaurants (use SearchFoodAndRestaurants instead)
+// - ToggleRestaurantFavorite
+// - ToggleFoodItemFavorite
