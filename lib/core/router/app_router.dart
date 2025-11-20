@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goatscave/features/food/food.dart';
 import 'package:goatscave/features/food/presentation/screens/food_home_screen.dart';
+import 'package:goatscave/features/grocery/grocery.dart';
 
 import 'package:goatscave/features/home/home.dart';
 
@@ -32,7 +33,8 @@ class AppRouter {
       ),
       GoRoute(
         path: "/grocery",
-        builder: (context, state) => const Placeholder(),
+        name: 'grocery',
+        builder: (context, state) => const GroceryHomeScreen(),
       ),
       // 🆕 NEW ROUTES FOR SUPER APP
 

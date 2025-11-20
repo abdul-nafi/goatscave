@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:goatscave/core/core.dart';
 
 import 'package:goatscave/features/food/food.dart';
-
+import 'features/grocery/grocery.dart';
 import 'features/cart/cart.dart';
 
 void main() {
@@ -29,10 +29,10 @@ class GoatsCaveApp extends StatelessWidget {
             BlocProvider<FoodBloc>(
               create: (context) => FoodBloc(),
             ),
-            // We'll add more BLoCs as we build them:
-            // BlocProvider<TaxiBloc>(create: (context) => TaxiBloc()),
-            // BlocProvider<GroceryBloc>(create: (context) => GroceryBloc()),
-            // BlocProvider<BusBloc>(create: (context) => BusBloc()),
+            BlocProvider<GroceryBloc>(
+              // ADD THIS
+              create: (context) => GroceryBloc(),
+            ),
           ],
           child: MaterialApp.router(
             title: 'GoatsCave',

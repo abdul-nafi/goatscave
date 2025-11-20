@@ -30,8 +30,8 @@ class AppColors {
   // 🎯 CATEGORY COLORS (For different services)
   static const Color taxiColor = Color(0xFF2563EB); // Blue
   static const Color busColor = Color(0xFF10B981); // Green
-  static const Color foodColor = Color(0xFFF59E0B); // Amber
-  static const Color groceryColor = Color(0xFF8B5CF6); // Purple
+  static const Color foodColor = Color(0xFFFF9800); // Amber
+  static const Color groceryColor = Color(0xFF4CAF50); // Purple
   static const Color servicesColor = Color(0xFFEC4899); // Pink
   static const Color parcelsColor = Color(0xFFF97316); // Orange
 

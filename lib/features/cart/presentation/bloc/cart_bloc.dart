@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:goatscave/features/cart/data/data.dart';
+import 'package:goatscave/features/cart/domain/domain.dart';
 import 'package:flutter/foundation.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -27,11 +27,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final newCart = state.cart.addItem(event.item);
       final restaurantId = event.item.restaurantId ?? state.currentRestaurantId;
 
-      emit(state.copyWith(
-        cart: newCart,
-        currentRestaurantId: restaurantId,
-        status: CartStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          cart: newCart,
+          currentRestaurantId: restaurantId,
+          status: CartStatus.success,
+        ),
+      );
     } catch (e) {
       emit(state.copyWith(status: CartStatus.failure));
     }
@@ -42,24 +44,31 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final newCart = state.cart.removeItem(event.itemId);
 
       // Clear restaurant if cart is empty
-      final restaurantId =
-          newCart.items.isEmpty ? null : state.currentRestaurantId;
+      final restaurantId = newCart.items.isEmpty
+          ? null
+          : state.currentRestaurantId;
 
-      emit(state.copyWith(
-        cart: newCart,
-        currentRestaurantId: restaurantId,
-        status: CartStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          cart: newCart,
+          currentRestaurantId: restaurantId,
+          status: CartStatus.success,
+        ),
+      );
     } catch (e) {
       emit(state.copyWith(status: CartStatus.failure));
     }
   }
 
   void _onQuantityUpdated(
-      CartItemQuantityUpdated event, Emitter<CartState> emit) {
+    CartItemQuantityUpdated event,
+    Emitter<CartState> emit,
+  ) {
     try {
-      final newCart =
-          state.cart.updateQuantity(event.itemId, event.newQuantity);
+      final newCart = state.cart.updateQuantity(
+        event.itemId,
+        event.newQuantity,
+      );
       emit(state.copyWith(cart: newCart, status: CartStatus.success));
     } catch (e) {
       emit(state.copyWith(status: CartStatus.failure));
@@ -71,7 +80,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   void _onRestaurantChanged(
-      CartRestaurantChanged event, Emitter<CartState> emit) {
+    CartRestaurantChanged event,
+    Emitter<CartState> emit,
+  ) {
     emit(state.copyWith(currentRestaurantId: event.restaurantId));
   }
 
@@ -83,9 +94,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   int getItemQuantity(String itemId) {
     try {
-      final item = state.cart.items.firstWhere(
-        (item) => item.id == itemId,
-      );
+      final item = state.cart.items.firstWhere((item) => item.id == itemId);
       return item.quantity;
     } catch (e) {
       return 0;
