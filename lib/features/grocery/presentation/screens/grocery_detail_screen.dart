@@ -103,7 +103,7 @@ class _GroceryStoreDetailScreenState extends State<GroceryStoreDetailScreen> {
                         size: 18.sp,
                       ),
                     ),
-                    onPressed: () => context.pop(),
+                    onPressed: () => context.go('/grocery'),
                   ),
                   actions: [
                     IconButton(

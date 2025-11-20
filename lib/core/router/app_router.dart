@@ -14,14 +14,8 @@ class AppRouter {
   static final router = GoRouter(
     initialLocation: "/home",
     routes: [
-      GoRoute(
-        path: "/login",
-        builder: (context, state) => Placeholder(),
-      ),
-      GoRoute(
-        path: "/signup",
-        builder: (context, state) => Placeholder(),
-      ),
+      GoRoute(path: "/login", builder: (context, state) => Placeholder()),
+      GoRoute(path: "/signup", builder: (context, state) => Placeholder()),
       GoRoute(
         path: "/home",
         builder: (context, state) =>
@@ -36,8 +30,14 @@ class AppRouter {
         name: 'grocery',
         builder: (context, state) => const GroceryHomeScreen(),
       ),
-      // 🆕 NEW ROUTES FOR SUPER APP
-
+      GoRoute(
+        path: '/grocery/store/:id',
+        name: 'store',
+        builder: (context, state) {
+          final storeId = state.pathParameters['id']!;
+          return GroceryStoreDetailScreen(storeId: storeId);
+        },
+      ),
       GoRoute(
         path: "/bus",
         builder: (context, state) =>
@@ -71,15 +71,14 @@ class AppRouter {
             const PlaceholderScreen(title: 'Help & Support'),
       ),
       GoRoute(
-          path: "/profile", builder: (context, state) => const Placeholder()),
+        path: "/profile",
+        builder: (context, state) => const Placeholder(),
+      ),
       GoRoute(
         path: "/taxi",
         builder: (context, state) => const TaxiBookingScreen(),
       ),
-      GoRoute(
-        path: "/cart",
-        builder: (context, state) => const CartScreen(),
-      ),
+      GoRoute(path: "/cart", builder: (context, state) => const CartScreen()),
     ],
   );
 }

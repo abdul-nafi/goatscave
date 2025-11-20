@@ -12,13 +12,10 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'My Cart',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        title: Text('My Cart', style: Theme.of(context).textTheme.titleLarge),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: () => context.go('/food'),
+          onPressed: () => context.go('/home'),
         ),
         backgroundColor: AppColors.surface,
         elevation: 0,
@@ -27,8 +24,10 @@ class CartScreen extends StatelessWidget {
             builder: (context, state) {
               if (state.hasItems) {
                 return IconButton(
-                  icon:
-                      const Icon(Icons.delete_outline, color: AppColors.error),
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.error,
+                  ),
                   onPressed: () {
                     context.read<CartBloc>().add(CartCleared());
                   },
@@ -47,9 +46,7 @@ class CartScreen extends StatelessWidget {
 
           return Column(
             children: [
-              Expanded(
-                child: _buildCartItems(context, state),
-              ),
+              Expanded(child: _buildCartItems(context, state)),
               _buildCheckoutSection(context, state),
             ],
           );
@@ -76,9 +73,9 @@ class CartScreen extends StatelessWidget {
           SizedBox(height: 12.h),
           Text(
             'Add some delicious items to get started',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 32.h),
@@ -134,8 +131,10 @@ class CartScreen extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
               image: DecorationImage(
-                image: NetworkImage(item.imageUrl ??
-                    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100'),
+                image: NetworkImage(
+                  item.imageUrl ??
+                      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100',
+                ),
                 fit: BoxFit.cover,
               ),
             ),
@@ -150,8 +149,8 @@ class CartScreen extends StatelessWidget {
                 Text(
                   item.name,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -159,8 +158,8 @@ class CartScreen extends StatelessWidget {
                 Text(
                   item.description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    color: AppColors.textSecondary,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -171,18 +170,18 @@ class CartScreen extends StatelessWidget {
                       Text(
                         '₹${item.price}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.textTertiary,
-                              decoration: TextDecoration.lineThrough,
-                            ),
+                          color: AppColors.textTertiary,
+                          decoration: TextDecoration.lineThrough,
+                        ),
                       ),
                       SizedBox(width: 8.w),
                     ],
                     Text(
                       '₹${item.finalPrice}',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: AppColors.foodColor,
-                            fontWeight: FontWeight.w700,
-                          ),
+                        color: AppColors.foodColor,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
@@ -203,31 +202,37 @@ class CartScreen extends StatelessWidget {
                   onPressed: () {
                     if (item.quantity > 1) {
                       context.read<CartBloc>().add(
-                            CartItemQuantityUpdated(item.id, item.quantity - 1),
-                          );
+                        CartItemQuantityUpdated(item.id, item.quantity - 1),
+                      );
                     } else {
                       context.read<CartBloc>().add(CartItemRemoved(item.id));
                     }
                   },
-                  icon: Icon(Icons.remove,
-                      size: 18.sp, color: AppColors.textPrimary),
+                  icon: Icon(
+                    Icons.remove,
+                    size: 18.sp,
+                    color: AppColors.textPrimary,
+                  ),
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(minWidth: 32.w, maxWidth: 32.w),
                 ),
                 Text(
                   item.quantity.toString(),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {
                     context.read<CartBloc>().add(
-                          CartItemQuantityUpdated(item.id, item.quantity + 1),
-                        );
+                      CartItemQuantityUpdated(item.id, item.quantity + 1),
+                    );
                   },
-                  icon: Icon(Icons.add,
-                      size: 18.sp, color: AppColors.textPrimary),
+                  icon: Icon(
+                    Icons.add,
+                    size: 18.sp,
+                    color: AppColors.textPrimary,
+                  ),
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(minWidth: 32.w, maxWidth: 32.w),
                 ),
@@ -319,20 +324,20 @@ class CartScreen extends StatelessWidget {
         Text(
           label,
           style: isTotal
-              ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  )
+              ? Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)
               : Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+                  color: AppColors.textSecondary,
+                ),
         ),
         Text(
           value,
           style: isTotal
               ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.foodColor,
-                  )
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.foodColor,
+                )
               : Theme.of(context).textTheme.bodyMedium,
         ),
       ],
@@ -345,7 +350,8 @@ class CartScreen extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: const Text('Checkout Coming Soon'),
         content: const Text(
-            'Checkout and payment integration will be available in the next update.'),
+          'Checkout and payment integration will be available in the next update.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -373,10 +379,13 @@ class CartScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Order Placed!',
-            style: TextStyle(color: AppColors.success)),
+        title: const Text(
+          'Order Placed!',
+          style: TextStyle(color: AppColors.success),
+        ),
         content: const Text(
-            'Your demo order has been placed successfully. In the real app, this would process payment and start delivery.'),
+          'Your demo order has been placed successfully. In the real app, this would process payment and start delivery.',
+        ),
         actions: [
           TextButton(
             onPressed: () {
